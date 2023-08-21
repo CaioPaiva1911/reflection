@@ -12,21 +12,33 @@ public class Alurator {
 	
 	public Object executa(String url){
 		// TODO - processa a requisicao executando o metodo
-		// da classe em questao
+		//  da classe em questao
 
-		// /produto/lista
+//		Produto lista
+
+//		produto -> roduto
+
 		Request request = new Request(url);
 
 		String nomeControle = request.getNomeControle();
+		String nomeMetodo = request.getNomeMetodo();
 
-		Object instaciaControle = new Reflexao()
+		/*Object instaciaControle = new Reflexao()
 				.refleteClasse(pacoteBase + nomeControle)
 				.getConstrutorPadrao()
+				.invoca();*/
+
+		Object retorno = new Reflexao()
+				.refleteClasse(pacoteBase + nomeControle)
+				.criaInstancia()
+				.getMetodo(nomeMetodo)
 				.invoca();
 
-		System.out.println(instaciaControle);
+//		obj.metodo();
 
-		return null;
+		System.out.println(retorno);
+
+		return retorno;
 
     }
 }

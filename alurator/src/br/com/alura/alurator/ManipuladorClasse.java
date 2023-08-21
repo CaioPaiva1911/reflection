@@ -1,5 +1,7 @@
 package br.com.alura.alurator;
 
+import br.com.alura.alurator.playground.reflexao.ManipuladorObjeto;
+
 import java.lang.reflect.Constructor;
 
 public class ManipuladorClasse {
@@ -17,5 +19,10 @@ public class ManipuladorClasse {
         } catch (NoSuchMethodException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public ManipuladorObjeto criaInstancia() {
+        Object instancia = getConstrutorPadrao().invoca();
+        return new ManipuladorObjeto(instancia);
     }
 }

@@ -1,17 +1,17 @@
 package br.com.alura.estoque.controle;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import br.com.alura.estoque.dao.ProdutoDaoMock;
 import br.com.alura.estoque.modelo.Produto;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProdutoController {
 	
 	private ProdutoDaoMock produtoDao;
 
-	public ProdutoController() {
-		produtoDao = new ProdutoDaoMock();
+	public ProdutoController(ProdutoDaoMock produtoDao) {
+		this.produtoDao = produtoDao;
 	}
 	
 	public List<Produto> lista() {
@@ -26,10 +26,10 @@ public class ProdutoController {
 	
 	public List<Produto> filtra(String nome, String marca) {
 		return produtoDao.lista().stream()
-							.filter(produto -> 
-								produto.getNome().toLowerCase().startsWith(nome.toLowerCase())
-								&& produto.getMarca().equalsIgnoreCase(marca)
-							)
-							.collect(Collectors.toList());
+			.filter(produto ->
+				produto.getNome().toLowerCase().startsWith(nome.toLowerCase())
+				&& produto.getMarca().equalsIgnoreCase(marca)
+			)
+			.collect(Collectors.toList());
 	}
 }

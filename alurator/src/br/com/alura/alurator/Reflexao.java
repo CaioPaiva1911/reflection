@@ -3,10 +3,13 @@ package br.com.alura.alurator;
 public class Reflexao {
 
     public ManipuladorClasse refleteClasse(String fqn) {
-        try {
-            Class<?> classe = Class.forName(fqn);
+        Class<?> classe = getClasse(fqn);
+        return new ManipuladorClasse(classe);
+    }
 
-            return new ManipuladorClasse(classe);
+    public Class<?> getClasse(String fqn) {
+        try {
+            return Class.forName(fqn);
         } catch (ClassNotFoundException e) {
             e.getStackTrace();
             throw new RuntimeException(e);

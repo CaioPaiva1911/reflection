@@ -4,7 +4,9 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/alurator/alurator.iml" filepath="$PROJECT_DIR$/alurator/alurator.iml" />
       <module fileurl="file://$PROJECT_DIR$/alurator-playground/alurator-playground.iml" filepath="$PROJECT_DIR$/alurator-playground/alurator-playground.iml" />
+      <module fileurl="file://$PROJECT_DIR$/alurator-playground/alurator-playground1.iml" filepath="$PROJECT_DIR$/alurator-playground/alurator-playground1.iml" />
       <module fileurl="file://$PROJECT_DIR$/estoque-api/estoque-api.iml" filepath="$PROJECT_DIR$/estoque-api/estoque-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/estoque-api/estoque-api1.iml" filepath="$PROJECT_DIR$/estoque-api/estoque-api1.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/reflection.iml" filepath="$PROJECT_DIR$/.idea/reflection.iml" />
     </modules>
   </component>

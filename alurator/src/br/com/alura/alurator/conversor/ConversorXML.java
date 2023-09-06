@@ -1,5 +1,7 @@
 package br.com.alura.alurator.conversor;
 
+import br.com.alura.alurator.conversor.anotacao.NomeTagXml;
+
 import java.lang.reflect.Field;
 import java.util.Collection;
 
@@ -10,8 +12,7 @@ public class ConversorXML {
             Class<?> classeObjeto = objeto.getClass();
             StringBuilder xmlBuilder = new StringBuilder();
 
-            if (objeto instanceof Collection){
-                Collection<?> colecao = (Collection<?>) objeto;
+            if (objeto instanceof Collection<?> colecao){
                 xmlBuilder.append("<lista>");
 
                 for(Object o : colecao){
@@ -21,19 +22,30 @@ public class ConversorXML {
 
                 xmlBuilder.append("</lista>");
             } else {
-                String nomeClasse = classeObjeto.getName();
+                NomeTagXml annotationClass = classeObjeto.getDeclaredAnnotation(NomeTagXml.class);
+
+                String nomeClasse =
+                        annotationClass == null
+                        ? classeObjeto.getName()
+                        : annotationClass.value();
 
                 xmlBuilder.append("<").append(nomeClasse).append(">");
 
                 for(Field atributo : classeObjeto.getDeclaredFields()) {
                     atributo.setAccessible(true);
-                    String nomeAtributo = atributo.getName();
+
+                    NomeTagXml annotationAtribute = atributo.getDeclaredAnnotation(NomeTagXml.class);
+
+                    String nomeAtributo =
+                            annotationAtribute == null
+                            ? atributo.getName()
+                            : annotationAtribute.value();
 
                     Object valorAtributo = atributo.get(objeto);
 
-                    xmlBuilder.append("<" + nomeAtributo + ">");
+                    xmlBuilder.append("<").append(nomeAtributo).append(">");
                     xmlBuilder.append(valorAtributo);
-                    xmlBuilder.append("</" + nomeAtributo + ">");
+                    xmlBuilder.append("</").append(nomeAtributo).append(">");
                 }
 
                 xmlBuilder.append("</").append(nomeClasse).append(">");
@@ -41,7 +53,7 @@ public class ConversorXML {
 
             return xmlBuilder.toString();
         } catch (IllegalAccessException e) {
-            e.printStackTrace();
+            e.fillInStackTrace();
             throw new RuntimeException("Erro na geração do XML! ");
         }
     }
